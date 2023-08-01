@@ -1,0 +1,79 @@
+body {
+    font-family: 'Times New Roman', serif;
+    background-color: #f6f1e7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.person {
+    margin-bottom: 30px;
+}
+
+.person-name {
+    color: #528b86;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.points {
+    font-size: 20px;
+    margin: 0;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #f6f1e7;
+    background-color: #0f4c81;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #17314d;
+}
+
+/* Hide the total points display by default */
+#totalPointsDisplay {
+    display: none;
+}
+
+/* Total points display area */
+#totalPointsDisplay p {
+    margin-bottom: 5px;
+}
+
+#totalPointsDisplay span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #528b86;
+}
+
+#totalPointsDisplay button {
+    background-color: #528b86;
+    margin: 20px 0;
+}
+#totalPointsDisplay {
+    display: none;
+}

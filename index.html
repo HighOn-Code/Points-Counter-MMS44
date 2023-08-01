@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Points Tracker</title>
+</head>
+<body>
+  
+    <h1>Points Tracker</h1>
+    <p>Mike's Points: <span id="mikePoints">0</span></p>
+    <button id="mikeButton" onclick="addPoints('mike')">Add 10 Points for Mike</button>
+
+    <p>Elisa's Points: <span id="elisaPoints">0</span></p>
+    <button id="elisaButton" onclick="addPoints('elisa')">Add 10 Points for Elisa</button>
+
+
+    <!-- New button to display total points -->
+    <button id="showTotalButton" onclick="showTotalPoints()">Show Total Points</button>
+    
+    <!-- Total points display area -->
+    <div id="totalPointsDisplay">
+        <p>Total Points:</p>
+        <p>Mike: <span id="totalMikePoints">0</span></p>
+        <p>Elisa: <span id="totalElisaPoints">0</span></p>
+    </div>
+
+    <script src="/javascript/script.js"></script>
+</body>
+</html>
