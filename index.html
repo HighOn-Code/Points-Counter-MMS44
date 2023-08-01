@@ -8,22 +8,29 @@
     <title>Points Tracker</title>
 </head>
 <body>
-  
-    <h1>Points Tracker</h1>
-    <button id="mikeButton" onclick="addPoints('mike')">Add 10 Points for Mike</button>
-
-    <button id="elisaButton" onclick="addPoints('elisa')">Add 10 Points for Elisa</button>
-
-
-    <!-- New button to display total points -->
-    <button id="showTotalButton" onclick="showTotalPoints()">Show Total Points</button>
-    
-    <!-- Total points display area -->
-    <div id="totalPointsDisplay">
-        <p>Total Points:</p>
-        <p>Mike: <span id="totalMikePoints">0</span></p>
-        <p>Elisa: <span id="totalElisaPoints">0</span></p>
+    <h1>The Holy "MMS44" Points Tracker</h1>
+    <div>
+        <h2>Mike's Points <span id="mikePoints">0></span></h2>
+        <button onclick="addPoints('mike')">Add Points</button>
+        
     </div>
+    <div>
+        <h2>Elisa's Points <span id="elisaPoints"> 0 </span></h2>
+        <button onclick="addPoints('elisa')">Add Points</button>
+    </div>
+    <div>
+        <button onclick="showTotalPoints()" id="showTotalButton">Show Total Points</button>
+        <div id="totalPointsDisplay" style="display: none;">
+            <h2>Total Points</h2>
+            <p>Mike: <span id="totalMikePoints">0</span></p>
+            <p>Elisa: <span id="totalElisaPoints">0</span></p>
+        </div>
+    </div>
+
+    <div>
+        <button onclick="resetPoints()" id="resetPointsButton">Reset Points</button>
+    </div>
+
 
     <script src="/javascript/script.js"></script>
 </body>
