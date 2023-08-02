@@ -1,3 +1,4 @@
+/* General styles for all screen sizes */
 body {
     font-family: 'Times New Roman', serif;
     background-color: #f6f1e7;
@@ -90,4 +91,41 @@ button:hover {
 
 #resetPointsButton:hover {
     background-color: #bd0f00;
+}
+
+/* Media Queries for Mobile Screens */
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    .person-name {
+        font-size: 20px;
+    }
+
+    .points {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    #totalPointsDisplay h2 {
+        font-size: 24px;
+    }
+
+    #totalPointsDisplay p {
+        font-size: 18px;
+    }
+
+    #totalPointsDisplay span {
+        font-size: 18px;
+    }
+
+    #totalPointsDisplay button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
 }
