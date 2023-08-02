@@ -12,29 +12,26 @@ body {
 }
 
 h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
+    font-size: 48px;
+    margin-bottom: 30px;
     color: #480808;
 }
 
-p {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-}
-
 .person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 30px;
 }
 
 .person-name {
     color: #528b86;
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 5px;
 }
 
 .points {
-    font-size: 20px;
+    font-size: 24px;
     margin: 0;
 }
 
@@ -48,6 +45,7 @@ button {
     cursor: pointer;
     margin: 10px;
     transition: background-color 0.3s;
+    border-radius: 5px;
 }
 
 button:hover {
@@ -57,23 +55,39 @@ button:hover {
 /* Hide the total points display by default */
 #totalPointsDisplay {
     display: none;
+    margin-top: 30px;
+    text-align: center;
 }
 
 /* Total points display area */
+#totalPointsDisplay h2 {
+    font-size: 36px;
+    color: #528b86;
+}
+
 #totalPointsDisplay p {
+    font-size: 24px;
     margin-bottom: 5px;
+    color: #333;
 }
 
 #totalPointsDisplay span {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #528b86;
 }
 
 #totalPointsDisplay button {
     background-color: #528b86;
-    margin: 20px 0px;
+    padding: 12px 24px;
+    font-size: 20px;
+    border-radius: 5px;
 }
-#totalPointsDisplay {
-    display: none;
+
+#resetPointsButton {
+    background-color: #960d00;
+}
+
+#resetPointsButton:hover {
+    background-color: #bd0f00;
 }
