@@ -72,7 +72,7 @@ button:hover {
 
 #totalPointsDisplay button {
     background-color: #528b86;
-    margin: 20px;
+    margin: 20px 0px;
 }
 #totalPointsDisplay {
     display: none;
