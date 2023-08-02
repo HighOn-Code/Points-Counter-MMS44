@@ -1,83 +1,111 @@
-        const mikePassword = "mike123"; // Replace with Mike's actual password
-        const elisaPassword = "elisa456"; // Replace with Elisa's actual password
-        let currentUser = null;
+// script.js
+const mikePassword = "mike123"; // Replace with Mike's actual password
+const elisaPassword = "elisa456"; // Replace with Elisa's actual password
+let currentUser = null;
 
-        function addPoints() {
-            // Check if the user is logged in before adding points
-            if (currentUser === null) {
-                promptLogin();
-                return;
-            }
+// Function to add points for Mike or Elisa
+function addPoints(person) {
+    // Check if the user is logged in before adding points
+    if (currentUser === null) {
+        promptLogin(person);
+        return;
+    }
 
-            // Get the person's name from the URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const person = urlParams.get("person");
+    // Check if the user is allowed to add points for the current person
+    if (currentUser !== person) {
+        alert("You are not allowed to add points for this person.");
+        return;
+    }
 
-            // Check if the user is allowed to add points for the current person
-            if (currentUser !== person) {
-                alert("You are not allowed to add points for this person.");
-                return;
-            }
+    const today = new Date().toISOString().slice(0, 10);
+    const lastUsedDate = localStorage.getItem(person + "LastUsed");
+    const clickCount = parseInt(localStorage.getItem(person + "ClickCount")) || 0;
 
-            const today = new Date().toISOString().slice(0, 10);
-            const lastUsedDate = localStorage.getItem(person + "LastUsed");
-            const clickCount = parseInt(localStorage.getItem(person + "ClickCount")) || 0;
+    if (lastUsedDate === today && clickCount >= 2) {
+        alert("You can use this button only twice a day.");
+        return;
+    }
 
-            if (lastUsedDate === today && clickCount >= 2) {
-                alert("You can use this button only twice a day.");
-                return;
-            }
+    let points = parseInt(localStorage.getItem(person + "Points")) || 0;
 
-            let points = parseInt(localStorage.getItem(person + "Points")) || 0;
+    if (clickCount === 0) {
+        points += 10;
+        localStorage.setItem(person + "ClickCount", 1);
+    } else if (clickCount === 1) {
+        points += 15;
+        localStorage.setItem(person + "ClickCount", 2);
+    }
 
-            if (clickCount === 0) {
-                points += 10;
-                localStorage.setItem(person + "ClickCount", 1);
-            } else if (clickCount === 1) {
-                points += 15;
-                localStorage.setItem(person + "ClickCount", 2);
-            }
+    document.getElementById(person + "Points").textContent = points;
+    localStorage.setItem(person + "Points", points);
+    localStorage.setItem(person + "LastUsed", today);
+}
 
-            document.getElementById("points").textContent = points;
-            localStorage.setItem(person + "Points", points);
-            localStorage.setItem(person + "LastUsed", today);
-        }
+function promptLogin(person) {
+    const password = prompt(`Enter ${person}'s password:`);
 
-        function promptLogin() {
-            const password = prompt(`Enter the password:`);
+    if (person === "mike" && password === mikePassword) {
+        currentUser = "mike";
+        addPoints("mike");
+    } else if (person === "elisa" && password === elisaPassword) {
+        currentUser = "elisa";
+        addPoints("elisa");
+    } else {
+        alert("Incorrect password. Please try again.");
+    }
+}
 
-            // Get the person's name from the URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const person = urlParams.get("person");
+function showTotalPoints() {
+    if (currentUser === null) {
+        alert("Please log in to view total points.");
+        return;
+    }
 
-            if (person === "mike" && password === mikePassword) {
-                currentUser = "mike";
-                addPoints();
-            } else if (person === "elisa" && password === elisaPassword) {
-                currentUser = "elisa";
-                addPoints();
-            } else {
-                alert("Incorrect password. Please try again.");
-            }
-        }
+    const totalMikePoints = parseInt(localStorage.getItem("mikePoints")) || 0;
+    const totalElisaPoints = parseInt(localStorage.getItem("elisaPoints")) || 0;
 
-        function redirectToPointsPage(person) {
-            window.location.href = `https://highon-code.github.io/points-counter.github.io/points.html?person=${person}`;
-        }
+    document.getElementById("totalMikePoints").textContent = totalMikePoints;
+    document.getElementById("totalElisaPoints").textContent = totalElisaPoints;
 
-        // On page load, fetch and display the points from local storage
-        window.onload = function () {
-            // Get the person's name from the URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const person = urlParams.get("person");
+    document.getElementById("showTotalButton").style.display = "none";
+    document.getElementById("totalPointsDisplay").style.display = "block";
+}
 
-            // Check if the person's name is valid
-            if (person === "mike" || person === "elisa") {
-                document.getElementById("personName").textContent = person.toUpperCase();
-                document.getElementById("pointsButton").textContent = `Add Points for ${person.toUpperCase()}`;
-                document.getElementById("pointsButton").onclick = addPoints;
-                document.getElementById("points").textContent = localStorage.getItem(person + "Points") || 0;
-            } else {
-                alert("Invalid person's name.");
-            }
-        };
+function hideTotalPoints() {
+    currentUser = null;
+    document.getElementById("totalPointsDisplay").style.display = "none";
+    document.getElementById("showTotalButton").style.display = "block";
+}
+
+window.onload = function () {
+    document.getElementById("mikePoints").textContent = localStorage.getItem("mikePoints") || 0;
+    document.getElementById("elisaPoints").textContent = localStorage.getItem("elisaPoints") || 0;
+};
+
+const resetPassword = "reset123"; // Replace with your desired reset password
+
+function resetPoints() {
+    const password = prompt("Enter the reset password:");
+
+    if (password === resetPassword) {
+        localStorage.setItem("mikePoints", 0);
+        localStorage.setItem("elisaPoints", 0);
+        localStorage.setItem("mikeClickCount", 0);
+        localStorage.setItem("elisaClickCount", 0);
+        document.getElementById("mikePoints").textContent = "0";
+        document.getElementById("elisaPoints").textContent = "0";
+
+        localStorage.removeItem("mikeLastUsed");
+        localStorage.removeItem("elisaLastUsed");
+
+        currentUser = null;
+
+        alert("Points and daily usage reset for both Mike and Elisa.");
+    } else {
+        alert("Incorrect password. Points reset aborted.");
+    }
+}
+
+function redirectToPointsPage(person) {
+    window.location.href = `https://highon-code.github.io/points-counter.github.io/points.html?person=${person}`;
+}
